@@ -4,10 +4,9 @@
 
 import numpy as np
 import tensorflow as tf
-from sklearn.cluster import KMeans
 from sklearn import svm
-from LearningError import HammingLoss
 from BayesianNetwork import build_structure
+from sklearn.externals import joblib
 
 class LEAD(object):
 
@@ -19,15 +18,13 @@ class LEAD(object):
         self.label_num = train_y.shape[1]
         self.errors = np.zeros(train_y.shape)
         self.DAG = np.zeros(self.label_num, self.label_num)
-        #self.kernel_type = 'linear'    # which kernel to use, options: 'RBF' and 'linear'
-        #self.sigma = ''                # sigma of the RBF kernel, if kernel_type='RBF'
+        self.clf_list = []
 
     def train(self):
         self.curve_fitting()  #
-
-        # n = self.train_x.shape[0] #number of dataset
-        # label_num = self.train_y.shape[1]
-        # DAG = np.zeros((label_num,label_num))
+        self.build_DAG()
+        self.construct_classifier()
+        self.load_model()
 
     # Implementing step 1 as shown in Subsection 2.2.2 in the paper
     #use tesorflow to construct 3 layers neural networks to implement nonlinear regression
@@ -84,23 +81,49 @@ class LEAD(object):
     #use pgmpy package to build bayesian network structure
     def build_DAG(self):
         DAG = build_structure(self.errors)
+
+        np.save('prepare_data/DAG.npy', DAG)
         return 0
+
+    # Implementing step 3 as shown in Subsection 2.2.2 in the paper
+    #use DAG and svm to build classifier,then save it
+    def construct_classifier(self):
+
+        for i in range(self.label_num):
+            cols =  np.nonzero(self.DAG[:,i] == 1)
+
+            for col in cols:
+                tempX = np.c_[self.train_x, self.train_y[:, col]]
+                tempY = np.delete(self.train_y, col, axis=1)
+            #end for
+
+            clf = svm.SVC(kernel='rbf')
+            clf.fit(tempX, tempY)
+            self.clf_list[i] = clf
+        #end for
+
+        joblib.dump(self.clf_list, 'sk-model/clf_list.pkl')
+
+     # Implementing step 4 as shown in Subsection 2.2.2 in the paper
+    def predict(self, test_x):
+        return 0
+
+    def load_model(self):
+        self.DAG = np.load('prepare_data/DAG.npy')
+        self.clf_list = joblib.load('save/clf.pkl')
 
 def load_data():
     train_x = np.load('prepare_data/train_x.npy')
     train_y = np.load('prepare_data/train_y.npy')
-    # test_x = np.load('prepare_data/test_x.npy')
-    # test_y = np.load('prepare_data/test_y.npy')
+    test_x = np.load('prepare_data/test_x.npy')
+    test_y = np.load('prepare_data/test_y.npy')
 
     return train_x, train_y
 
 if __name__=='__main__':
     train_x, train_y = load_data()
     lead = LEAD(train_x, train_y)
-    #lead.train() #if you first run this pro ,you should run this function
+    #lead.train()                   #if you first run this pro ,you should run this function
 
-    lead.build_DAG()
-    # errors = np.load('prepare_data/errors.npy')
-    # print(errors.dtype)
-    # np.savetxt('prepare_data/errors.txt', errors)
+
 
