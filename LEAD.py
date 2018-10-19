@@ -17,14 +17,13 @@ class LEAD(object):
         self.feature_num = train_x.shape[1]
         self.label_num = train_y.shape[1]
         self.errors = np.zeros(train_y.shape)
-        self.DAG = np.zeros(self.label_num, self.label_num)
+        self.DAG = np.zeros((self.label_num, self.label_num))
         self.clf_list = []
 
     def train(self):
-        self.curve_fitting()  #
+        self.curve_fitting()
         self.build_DAG()
         self.construct_classifier()
-        self.load_model()
 
     # Implementing step 1 as shown in Subsection 2.2.2 in the paper
     #use tesorflow to construct 3 layers neural networks to implement nonlinear regression
@@ -81,7 +80,6 @@ class LEAD(object):
     #use pgmpy package to build bayesian network structure
     def build_DAG(self):
         DAG = build_structure(self.errors)
-
         np.save('prepare_data/DAG.npy', DAG)
         return 0
 
@@ -91,26 +89,28 @@ class LEAD(object):
 
         for i in range(self.label_num):
             cols =  np.nonzero(self.DAG[:,i] == 1)
+            tempX = self.train_x
 
             for col in cols:
-                tempX = np.c_[self.train_x, self.train_y[:, col]]
-                tempY = np.delete(self.train_y, col, axis=1)
+                tempX = np.c_[tempX, self.train_y[:, col]]
             #end for
 
+            tempY = self.train_y[:, i].reshape(-1,1)
             clf = svm.SVC(kernel='rbf')
             clf.fit(tempX, tempY)
-            self.clf_list[i] = clf
+            self.clf_list.append(clf)
         #end for
 
         joblib.dump(self.clf_list, 'sk-model/clf_list.pkl')
 
      # Implementing step 4 as shown in Subsection 2.2.2 in the paper
     def predict(self, test_x):
+
         return 0
 
     def load_model(self):
         self.DAG = np.load('prepare_data/DAG.npy')
-        self.clf_list = joblib.load('save/clf.pkl')
+        self.clf_list = joblib.load('sk-model/clf_list.pkl')
 
 def load_data():
     train_x = np.load('prepare_data/train_x.npy')
@@ -125,5 +125,7 @@ if __name__=='__main__':
     lead = LEAD(train_x, train_y)
     #lead.train()                   #if you first run this pro ,you should run this function
 
+    lead.load_model()
+    lead.predict()
 
 

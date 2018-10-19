@@ -4,15 +4,20 @@
 
 import pandas as pd
 import numpy as np
-from pgmpy.estimators import ExhaustiveSearch
+from pgmpy.estimators import ExhaustiveSearch, HillClimbSearch, BicScore
 
 def build_structure(data):
     df = pd.DataFrame(data)
-    est = ExhaustiveSearch(df)
+    est = HillClimbSearch(df, scoring_method=BicScore(df))
     model = est.estimate()
-    file = open('prepare_data/DAG.txt','w')
-    file.write(str(model.edges()))
-    file.close()
-    print(model.edges())
-    return model.edges
+    DAG = np.zeros((data.shape[1], data.shape[1]), np.int64)
 
+    for edge in model.edges():
+        DAG[edge[0], edge[1]] = 1
+
+    np.save('prepare_data/DAG.npy', DAG)
+    return DAG
+
+if __name__=='__main__':
+    errors = np.load('prepare_data/errors.npy')
+    build_structure(errors)
