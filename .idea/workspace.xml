@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="604727aa-ac5b-4225-b739-868b25de7b99" name="Default" comment="update readme">
+    <list default="true" id="604727aa-ac5b-4225-b739-868b25de7b99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BayesianNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/BayesianNetwork.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LEAD.py" beforeDir="false" afterPath="$PROJECT_DIR$/LEAD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LearningError.py" beforeDir="false" afterPath="$PROJECT_DIR$/LearningError.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prepare_data/train_y.npy" beforeDir="false" afterPath="$PROJECT_DIR$/prepare_data/train_y.npy" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/LEAD$BayesianNetwork.coverage" NAME="BayesianNetwork Coverage Results" MODIFIED="1539915292741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LEAD$BayesianNetwork.coverage" NAME="BayesianNetwork Coverage Results" MODIFIED="1539954490340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LEAD$temp.coverage" NAME="temp Coverage Results" MODIFIED="1539608218070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LEAD$bayesian_network.coverage" NAME="bayesian_network Coverage Results" MODIFIED="1539782394744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LEAD$LEAD.coverage" NAME="LEAD Coverage Results" MODIFIED="1539930642218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -26,15 +24,11 @@
       <file leaf-file-name="LEAD.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LEAD.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="107" column="8" lean-forward="true" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+            <state relative-caret-position="1412">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
               <folding>
                 <element signature="e#73#91#0" expanded="true" />
-                <element signature="e#660#743#0" />
-                <element signature="e#1215#3349#0" />
-                <element signature="e#3511#3608#0" />
-                <element signature="e#3560#4079#0" />
-                <element signature="e#3586#3810#0" />
+                <element signature="e#939#3073#0" />
               </folding>
             </state>
           </provider>
@@ -43,10 +37,22 @@
       <file leaf-file-name="BayesianNetwork.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BayesianNetwork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <state relative-caret-position="482">
+              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
               <folding>
                 <element signature="e#85#104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LearningError.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LearningError.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#82#100#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +79,8 @@
         <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/bayesian_network.py" />
         <option value="$PROJECT_DIR$/LearningError.py" />
-        <option value="$PROJECT_DIR$/BayesianNetwork.py" />
         <option value="$PROJECT_DIR$/LEAD.py" />
+        <option value="$PROJECT_DIR$/BayesianNetwork.py" />
       </list>
     </option>
   </component>
@@ -88,8 +94,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="410" />
-    <option name="y" value="86" />
+    <option name="x" value="218" />
+    <option name="y" value="83" />
     <option name="width" value="1297" />
     <option name="height" value="910" />
   </component>
@@ -105,6 +111,11 @@
             <path>
               <item name="LEAD" type="b2602c69:ProjectViewProjectNode" />
               <item name="LEAD" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LEAD" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LEAD" type="462c0819:PsiDirectoryNode" />
+              <item name="prepare_data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LEAD" type="b2602c69:ProjectViewProjectNode" />
@@ -146,7 +157,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.LEAD">
+  <component name="RunManager" selected="Python.BayesianNetwork">
     <configuration name="BayesianNetwork" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="LEAD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -231,8 +242,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.LEAD" />
         <item itemvalue="Python.BayesianNetwork" />
+        <item itemvalue="Python.LEAD" />
         <item itemvalue="Python.bayesian_network" />
         <item itemvalue="Python.temp" />
       </list>
@@ -263,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539869285827</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update project">
+      <created>1539931378387</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1539931378387</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -274,8 +292,8 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.35152838" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.36353713" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.27510917" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.21943231" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15238096" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -302,7 +320,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update pro" />
     <MESSAGE value="update readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="update readme" />
+    <MESSAGE value="update project" />
+    <option name="LAST_COMMIT_MESSAGE" value="update project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -312,15 +331,42 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/LEAD.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3270">
+          <caret line="113" selection-start-line="113" selection-end-line="113" />
+          <folding>
+            <element signature="e#73#91#0" expanded="true" />
+            <element signature="e#939#3073#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LearningError.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#82#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BayesianNetwork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="e#85#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAD.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2700">
           <caret line="95" column="27" lean-forward="true" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
           <folding>
             <element signature="e#73#91#0" expanded="true" />
-            <element signature="e#660#743#0" />
-            <element signature="e#1215#3349#0" />
-            <element signature="e#3511#3608#0" />
-            <element signature="e#3560#4079#0" />
-            <element signature="e#3586#3810#0" />
+            <element signature="e#939#3073#0" />
           </folding>
         </state>
       </provider>
@@ -351,11 +397,7 @@
           <caret line="94" column="27" selection-start-line="94" selection-start-column="27" selection-end-line="94" selection-end-column="27" />
           <folding>
             <element signature="e#73#91#0" expanded="true" />
-            <element signature="e#660#743#0" />
-            <element signature="e#1215#3349#0" />
-            <element signature="e#3511#3608#0" />
-            <element signature="e#3560#4079#0" />
-            <element signature="e#3586#3810#0" />
+            <element signature="e#939#3073#0" />
           </folding>
         </state>
       </provider>
@@ -386,11 +428,7 @@
           <caret line="94" column="23" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="23" />
           <folding>
             <element signature="e#73#91#0" expanded="true" />
-            <element signature="e#660#743#0" />
-            <element signature="e#1215#3349#0" />
-            <element signature="e#3511#3608#0" />
-            <element signature="e#3560#4079#0" />
-            <element signature="e#3586#3810#0" />
+            <element signature="e#939#3073#0" />
           </folding>
         </state>
       </provider>
@@ -435,11 +473,7 @@
           <caret line="94" column="23" lean-forward="true" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="23" />
           <folding>
             <element signature="e#73#91#0" expanded="true" />
-            <element signature="e#660#743#0" />
-            <element signature="e#1215#3349#0" />
-            <element signature="e#3511#3608#0" />
-            <element signature="e#3560#4079#0" />
-            <element signature="e#3586#3810#0" />
+            <element signature="e#939#3073#0" />
           </folding>
         </state>
       </provider>
@@ -481,11 +515,7 @@
           <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="e#73#91#0" expanded="true" />
-            <element signature="e#660#743#0" />
-            <element signature="e#1215#3349#0" />
-            <element signature="e#3511#3608#0" />
-            <element signature="e#3560#4079#0" />
-            <element signature="e#3586#3810#0" />
+            <element signature="e#939#3073#0" />
           </folding>
         </state>
       </provider>
@@ -520,9 +550,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prepare_data/DAG.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/prepare_data/DAG.txt" />
     <entry file="file://$PROJECT_DIR$/prepare_data/DAG.npy">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -538,8 +566,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BayesianNetwork.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+        <state relative-caret-position="482">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
           <folding>
             <element signature="e#85#104#0" expanded="true" />
           </folding>
@@ -548,15 +576,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LEAD.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="107" column="8" lean-forward="true" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+        <state relative-caret-position="1412">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
           <folding>
             <element signature="e#73#91#0" expanded="true" />
-            <element signature="e#660#743#0" />
-            <element signature="e#1215#3349#0" />
-            <element signature="e#3511#3608#0" />
-            <element signature="e#3560#4079#0" />
-            <element signature="e#3586#3810#0" />
+            <element signature="e#939#3073#0" />
           </folding>
         </state>
       </provider>

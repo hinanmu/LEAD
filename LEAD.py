@@ -19,6 +19,8 @@ class LEAD(object):
         self.errors = np.zeros(train_y.shape)
         self.DAG = np.zeros((self.label_num, self.label_num))
         self.clf_list = []
+        self.output = np.zeros(self.label_num)
+        self.is_caculate = np.zeros(self.label_num, np.bool)
 
     def train(self):
         self.curve_fitting()
@@ -79,7 +81,7 @@ class LEAD(object):
     # Implementing step 2 as shown in Subsection 2.2.2 in the paper
     #use pgmpy package to build bayesian network structure
     def build_DAG(self):
-        DAG = build_structure(self.errors)
+        edges, DAG = build_structure(self.errors)
         np.save('prepare_data/DAG.npy', DAG)
         return 0
 
@@ -105,8 +107,68 @@ class LEAD(object):
 
      # Implementing step 4 as shown in Subsection 2.2.2 in the paper
     def predict(self, test_x):
+        label_parent = []
+
+        for i in range(self.label_num):
+            label_parent.append(np.nonzero(self.DAG[:, i] == 1))
+
+        for i in range(self.label_num):
+            self.output[i], _ = self.predict_single(test_x, label_parent, i)
 
         return 0
+
+    def predict_single(self,test_x, label_parent, idx):
+        #if idx-th label is independent
+        if np.size(label_parent[idx]) == 0:
+            pro_pos = self.clf_list[idx].predict(test_x)
+            pro_neg = 1 - pro_pos
+
+            self.is_caculate[idx] = 1
+
+            return pro_pos, pro_neg
+        # if idx-th label has parents
+        else:
+            pa_size = np.size(label_parent[idx])
+            pa_pro_pos = np.zeros(pa_size)
+            pa_pro_neg = np.zeros(pa_size)
+            temp_pa_value = np.zeros((2**pa_size, pa_size), np.int64)
+
+            for i in range(2 ** pa_size):
+                temp = np.zeros(pa_size, np.int64)
+                for j in range(pa_size):
+                    temp[j] = ((i >> j) & 1)
+                temp_pa_value[i, :] = temp[::-1]
+
+            i = 0
+            for pa in label_parent[idx]:
+                if self.is_caculate[pa] == 0:
+                    pa_pro_pos[i], pa_pro_neg[i] =  self.predict_single(test_x, label_parent, pa)
+                else:
+                    pa_pro_pos[i] = self.output[pa]
+                    pa_pro_neg[i] = 1 - pa_pro_pos[i]
+                #end if
+
+                i = i + 1
+            #end for
+
+            pro_pos = 0
+            for i in range(2 ** pa_size):
+                tempX = [test_x, temp_pa_value[i,:]]
+                temp_pro = self.clf_list[idx].predict(tempX)
+
+                for j in range(pa_size):
+                    if temp_pa_value[i,j] == 1:
+                        temp_pro = temp_pro * pa_pro_pos[j]
+                    else:
+                        temp_pro = temp_pro * pa_pro_neg[j]
+                #end for
+
+                pro_pos = pro_pos + temp_pro
+            #end for
+
+            pro_neg = 1 - pro_pos
+
+        return pro_pos, pro_neg
 
     def load_model(self):
         self.DAG = np.load('prepare_data/DAG.npy')
