@@ -7,6 +7,7 @@ import tensorflow as tf
 from sklearn import svm
 from BayesianNetwork import build_structure
 from sklearn.externals import joblib
+from LearningError import hamming_loss
 
 class LEAD(object):
 
@@ -23,9 +24,10 @@ class LEAD(object):
         self.is_caculate = np.zeros(self.label_num, np.bool)
 
     def train(self):
-        self.curve_fitting()
-        self.build_DAG()
+        #self.curve_fitting()
+        #self.build_DAG()
         self.construct_classifier()
+
 
     # Implementing step 1 as shown in Subsection 2.2.2 in the paper
     #use tesorflow to construct 3 layers neural networks to implement nonlinear regression
@@ -98,7 +100,7 @@ class LEAD(object):
             #end for
 
             tempY = self.train_y[:, i].reshape(-1,1)
-            clf = svm.SVC(kernel='rbf')
+            clf = svm.SVC(kernel='rbf', probability=True)
             clf.fit(tempX, tempY)
             self.clf_list.append(clf)
         #end for
@@ -113,14 +115,19 @@ class LEAD(object):
             label_parent.append(np.nonzero(self.DAG[:, i] == 1))
 
         for i in range(self.label_num):
-            self.output[i], _ = self.predict_single(test_x, label_parent, i)
+            if self.is_caculate[i] == 0:
+                self.output[i], _ = self.predict_single(test_x, label_parent, i)
 
-        return 0
+        # for i in range(self.label_num):
+        #     print(self.output[i])
+        return self.output
 
     def predict_single(self,test_x, label_parent, idx):
         #if idx-th label is independent
+
         if np.size(label_parent[idx]) == 0:
-            pro_pos = self.clf_list[idx].predict(test_x)
+            print('独立节点计算',idx)
+            pro_pos = self.clf_list[idx].predict_proba(test_x)[0][0]
             pro_neg = 1 - pro_pos
 
             self.is_caculate[idx] = 1
@@ -129,6 +136,7 @@ class LEAD(object):
         # if idx-th label has parents
         else:
             pa_size = np.size(label_parent[idx])
+            print(idx,'有父节点计算,大小', pa_size)
             pa_pro_pos = np.zeros(pa_size)
             pa_pro_neg = np.zeros(pa_size)
             temp_pa_value = np.zeros((2**pa_size, pa_size), np.int64)
@@ -139,22 +147,20 @@ class LEAD(object):
                     temp[j] = ((i >> j) & 1)
                 temp_pa_value[i, :] = temp[::-1]
 
-            i = 0
-            for pa in label_parent[idx]:
-                if self.is_caculate[pa] == 0:
-                    pa_pro_pos[i], pa_pro_neg[i] =  self.predict_single(test_x, label_parent, pa)
+            idx_pa_list = label_parent[idx][0].tolist()
+            for i in range (len(idx_pa_list)):
+                if self.is_caculate[idx_pa_list[i]] == 0:
+                    pa_pro_pos[i], pa_pro_neg[i] =  self.predict_single(test_x, label_parent, idx_pa_list[i])
                 else:
-                    pa_pro_pos[i] = self.output[pa]
+                    pa_pro_pos[i] = self.output[idx_pa_list[i]]
                     pa_pro_neg[i] = 1 - pa_pro_pos[i]
                 #end if
-
-                i = i + 1
             #end for
 
             pro_pos = 0
             for i in range(2 ** pa_size):
-                tempX = [test_x, temp_pa_value[i,:]]
-                temp_pro = self.clf_list[idx].predict(tempX)
+                tempX = np.c_[test_x, temp_pa_value[i,:].reshape(1, -1)]
+                temp_pro = self.clf_list[idx].predict_proba(tempX)[0][0]
 
                 for j in range(pa_size):
                     if temp_pa_value[i,j] == 1:
@@ -167,6 +173,7 @@ class LEAD(object):
             #end for
 
             pro_neg = 1 - pro_pos
+            self.is_caculate[idx] = 1
 
         return pro_pos, pro_neg
 
@@ -180,14 +187,16 @@ def load_data():
     test_x = np.load('prepare_data/test_x.npy')
     test_y = np.load('prepare_data/test_y.npy')
 
-    return train_x, train_y
+    return train_x, train_y, test_x, test_y
 
 if __name__=='__main__':
-    train_x, train_y = load_data()
+    train_x, train_y, test_x, test_y = load_data()
     lead = LEAD(train_x, train_y)
+    lead.load_model()
     #lead.train()                   #if you first run this pro ,you should run this function
 
-    lead.load_model()
-    lead.predict()
-
-
+    output = np.zeros(test_y.shape)
+    for i in range(test_x.shape[0]):
+        output[i,:] = lead.predict(test_x[i, :].reshape(1, -1))
+    predict = np.rint(output).astype(np.int64)
+    print(hamming_loss(test_y, predict))
