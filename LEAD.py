@@ -118,13 +118,10 @@ class LEAD(object):
             if self.is_caculate[i] == 0:
                 self.output[i], _ = self.predict_single(test_x, label_parent, i)
 
-        # for i in range(self.label_num):
-        #     print(self.output[i])
         return self.output
 
     def predict_single(self,test_x, label_parent, idx):
         #if idx-th label is independent
-
         if np.size(label_parent[idx]) == 0:
             print('独立节点计算',idx)
             pro_pos = self.clf_list[idx].predict_proba(test_x)[0][0]
@@ -167,6 +164,7 @@ class LEAD(object):
                         temp_pro = temp_pro * pa_pro_pos[j]
                     else:
                         temp_pro = temp_pro * pa_pro_neg[j]
+                    #end if
                 #end for
 
                 pro_pos = pro_pos + temp_pro
@@ -174,7 +172,7 @@ class LEAD(object):
 
             pro_neg = 1 - pro_pos
             self.is_caculate[idx] = 1
-
+        #end if
         return pro_pos, pro_neg
 
     def load_model(self):
