@@ -5,9 +5,9 @@
 import numpy as np
 import tensorflow as tf
 from sklearn import svm
-from BayesianNetwork import build_structure
+from bayesian_network import build_structure
 from sklearn.externals import joblib
-from LearningError import hamming_loss
+from Learning_error import hamming_loss
 
 class LEAD(object):
 
