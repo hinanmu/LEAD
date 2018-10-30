@@ -15,9 +15,9 @@ def build_structure(data):
     for edge in model.edges():
         DAG[edge[0], edge[1]] = 1
 
-    np.save('prepare_data/DAG.npy', DAG)
+    np.save('dataset/DAG.npy', DAG)
     return DAG
 
 if __name__=='__main__':
-    errors = np.load('prepare_data/errors.npy')
+    errors = np.load('dataset/errors.npy')
     build_structure(errors)

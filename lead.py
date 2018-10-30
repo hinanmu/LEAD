@@ -77,14 +77,14 @@ class LEAD(object):
             saver = tf.train.Saver()
             saver.save(sess, "./tf_model/model")
             self.errors = self.errors.astype(np.int)
-            np.save('prepare_data/errors.npy', self.errors)
+            np.save('dataset/errors.npy', self.errors)
             #end for
 
     # Implementing step 2 as shown in Subsection 2.2.2 in the paper
     #use pgmpy package to build bayesian network structure
     def build_DAG(self):
         edges, DAG = build_structure(self.errors)
-        np.save('prepare_data/DAG.npy', DAG)
+        np.save('dataset/DAG.npy', DAG)
         return 0
 
     # Implementing step 3 as shown in Subsection 2.2.2 in the paper
@@ -176,14 +176,14 @@ class LEAD(object):
         return pro_pos, pro_neg
 
     def load_model(self):
-        self.DAG = np.load('prepare_data/DAG.npy')
+        self.DAG = np.load('dataset/DAG.npy')
         self.clf_list = joblib.load('sk-model/clf_list.pkl')
 
 def load_data():
-    train_x = np.load('prepare_data/train_x.npy')
-    train_y = np.load('prepare_data/train_y.npy')
-    test_x = np.load('prepare_data/test_x.npy')
-    test_y = np.load('prepare_data/test_y.npy')
+    train_x = np.load('dataset/train_x.npy')
+    train_y = np.load('dataset/train_y.npy')
+    test_x = np.load('dataset/test_x.npy')
+    test_y = np.load('dataset/test_y.npy')
 
     return train_x, train_y, test_x, test_y
 
